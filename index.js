@@ -48,16 +48,16 @@ function constructTable(objArr, techName) {
     str += '</tr>\n';
     for(var i=0;i<objArr.length;i++) {
         if(objArr[i].techName === techName && !objArr[i].isDeleted) {
-            str += '<tr>\n';
+            str += '<tr id = '+(i+1)+'>\n';
             str += '<td>'+objArr[i].examName+'&emsp;&emsp;</td>\n';
             str += '<td>'+'<button class = "viewButton">View Exam</button>'+'&emsp;&emsp;</td>\n';
             str += '<td>'+objArr[i].diffLevel+'&emsp;&emsp;</td>\n';
             str += '<td>'+objArr[i].dueDate+'&emsp;&emsp;</td>\n';
             str += '<td>'+objArr[i].status+'&emsp;&emsp;</td>\n';
-            str += '<td>'+objArr[i].avgTime+'&emsp;&emsp;</td>\n';
+            str += '<td>'+objArr[i].avgTime+' mins&emsp;&emsp;</td>\n';
             let examName = objArr[i].examName;
             console.log('@@@@@@', examName);
-            str += '<td><i class = "fa fa-edit"></i>&emsp;<i class = "fas fa-trash-alt" onClick = "deleteHandler(\''+examName+'\')"></i>&emsp;</td>\n';
+            str += '<td><i class = "fa fa-edit" onClick = "editHandler(\''+examName+'\')"></i>&emsp;<i class = "fas fa-trash-alt" onClick = "deleteHandler(\''+examName+'\')"></i>&emsp;</td>\n';
             str += '</tr>\n';
             str += '</br>\n';
         }
@@ -104,61 +104,67 @@ function loadObjArr() {
     let techObj = {
         techName : 'Web development', 
         examName : 'DHTML suite for beginners',
-        diffLevel : 'intro',
-        dueDate : '23/06/2021',
+        diffLevel : 'Intro',
+        dueDate : '2022-06-22',
         status : 'Active',
-        avgTime : '10 mins',   
-        isDeleted : false 
+        avgTime : 10,   
+        isDeleted : false ,
+        isEditable : false
      }
      objArr.push(techObj);
      techObj = {
         techName : 'Web development', 
         examName : 'Programming with html and css',
-        diffLevel : 'intro',
-        dueDate : '23/06/2021',
+        diffLevel : 'Intro',
+        dueDate : '2022-06-22',
         status : 'Active',
-        avgTime : '10 mins',   
-        isDeleted : false 
+        avgTime : 10,   
+        isDeleted : false,
+        isEditable : false
      }
      objArr.push(techObj);
      techObj = {
         techName : 'Web development', 
         examName : 'Javascript with jquery',
-        diffLevel : 'advanced',
-        dueDate : '23/06/2021',
+        diffLevel : 'Advanced',
+        dueDate : '2022-06-22',
         status : 'Hidden',
-        avgTime : '15 mins',   
-        isDeleted : false 
+        avgTime : 15,   
+        isDeleted : false,
+        isEditable : false
      }
      objArr.push(techObj);
      techObj = {
         techName : 'Database tech', 
         examName : 'My sql and sql',
-        diffLevel : 'intermediate',
-        dueDate : '23/06/2021',
+        diffLevel : 'Intermediate',
+        dueDate : '2022-06-22',
         status : 'Active',
-        avgTime : '20 mins',   
-        isDeleted : false 
+        avgTime : 20,   
+        isDeleted : false,
+        isEditable : false
      }
      objArr.push(techObj);
      techObj = {
         techName : 'Database tech', 
         examName : 'plsql and sql',
-        diffLevel : 'advanced',
-        dueDate : '23/06/2021',
+        diffLevel : 'Advanced',
+        dueDate : '2022-06-22',
         status : 'Hidden',
-        avgTime : '10 mins',   
-        isDeleted : false 
+        avgTime : 10,   
+        isDeleted : false,
+        isEditable : false 
      }
      objArr.push(techObj);
      techObj = {
         techName : 'Mobile tech', 
         examName : 'History of mobile devices',
-        diffLevel : 'advanced',
-        dueDate : '23/06/2021',
+        diffLevel : 'Advanced',
+        dueDate : '2022-06-22',
         status : 'Hidden',
-        avgTime : '15 mins',   
-        isDeleted : false 
+        avgTime : 15,   
+        isDeleted : false,
+        isEditable : false 
      }
      objArr.push(techObj);
      console.log('@@@ obj ',objArr);
@@ -174,4 +180,44 @@ function deleteHandler(examName) {
             break;
         }
     }
+}
+
+
+function editHandler(examName) {
+     var i;
+    for(i=0;i<objArr.length;i++) {
+        if(objArr[i].examName === examName) {
+            objArr[i].isEditable = true;
+            break;
+        }
+    }
+    console.log(objArr);
+   document.getElementById('diffLevel').value = objArr[i].diffLevel;
+    document.getElementById('dueDate').value = objArr[i].dueDate;
+    document.getElementById('avgTime').value = objArr[i].avgTime;
+    document.querySelector(".page1").style.width = "80%";
+    document.querySelector(".page1").style.float = "left";
+    document.querySelector(".page2").style.width = "20%";
+    document.querySelector(".page2").style.float = "left";
+    document.querySelector(".page2").style.textAlign = "center";
+    document.querySelector(".page2").style.visibility = "visible";
+}
+
+function saveHandler() {
+
+    for(var i=0;i<objArr.length;i++) {
+        if(objArr[i].isEditable === true) {
+            objArr[i].isEditable = false;
+            objArr[i].diffLevel = document.getElementById('diffLevel').value;
+            objArr[i].dueDate = document.getElementById('dueDate').value;
+            objArr[i].avgTime = document.getElementById('avgTime').value;
+            console.log('@@@ selected values ',document.getElementById('diffLevel'),' ',document.getElementById('dueDate'),' ',document.getElementById('avgTime'));
+            connectedCallBack();  
+            document.querySelector(".page1").style.width = "100%";
+            document.querySelector(".page2").style.width = "0%";
+            document.querySelector(".page2").style.visibility = "hidden";
+            break;
+        }
+    }
+    
 }

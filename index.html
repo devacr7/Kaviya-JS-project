@@ -53,41 +53,80 @@
             border-color: blue;
             border-radius: 1rem;
         }
+        .page1 {
+            width: 100%;
+            float: left;
+        }
+        .page2 {
+            visibility: hidden;
+            padding-top: 5rem;
+            font-size: 1.3rem;
+            width: 0%;
+            float: left;
+        }
+        .saveButton {
+            background-color: gray;
+            color: white;   
+            border: none;
+            width: 30%;
+            height: 20%;
+            font-size: 1rem;
+            border-radius: 1rem;
+        }
+        .formLabel {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body onload="onLoadHandler()">
-    <div class="tableDiv">
-        <table>
-            <tr class="tableHeader">  
-                <th>EXAM&emsp;&emsp;</th>
-                <th>VIEW EXAM&emsp;&emsp;</th>
-                <th>DIFFICULT LEVEL&emsp;&emsp;</th>
-                <th>DUE DATE&emsp;&emsp;</th>
-                <th>STATUS&emsp;&emsp;</th>
-                <th>AVERAGE TEST TIME&emsp;&emsp;</th>
-                <th>EXAM CONTROLS&emsp;&emsp;</th>
+    <div class="page1">
+        <div class="tableDiv">
+            <table>
+                <tr class="tableHeader">  
+                    <th>EXAM&emsp;&emsp;</th>
+                    <th>VIEW EXAM&emsp;&emsp;</th>
+                    <th>DIFFICULT LEVEL&emsp;&emsp;</th>
+                    <th>DUE DATE&emsp;&emsp;</th>
+                    <th>STATUS&emsp;&emsp;</th>
+                    <th>AVERAGE TEST TIME&emsp;&emsp;</th>
+                    <th>EXAM CONTROLS&emsp;&emsp;</th>
+                </tr>
+            </table>
+        </div>
+        <button class="accordion"><b>Web Development</b></button>
+        <div class="panel">
+                <div class="wdValues"></div>
+        </div>
+            <button class="accordion"><b>Database Technologies</b></button>
+            <tr>
+                <div class="panel">
+                    <div class="dbValues"></div>
+                </div>
             </tr>
-        </table>
+            <tr>
+                <button class="accordion"><b>Mobile Technologies</b></button>
+            </tr>
+            <tr>
+                <div class="panel">
+                    <div class="mdValues"></div>
+                </div>
+            </tr>
     </div>
-    <button class="accordion"><b>Web Development</b></button>
-    <div class="panel">
-            <div class="wdValues"></div>
+    <div class="page2">
+        <form>
+            <Label class = "formLabel" for="diffLevel">Difficulty Level</Label><br>
+            <select name="diffLevel" id="diffLevel">
+                <option value="Intro">Intro</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select><br><br>
+            <label class = "formLabel" for="dueDate">Due Time</label><br>
+            <input type="Date" id="dueDate" name="dueDate"><br><br>
+            <label class = "formLabel" for="avgTime">Average Test Time</label><br>
+            <input type="number" id="avgTime" name="avgTime"><br><br>
+        </form>
+        <button class="saveButton" onclick="saveHandler()">save</button>
     </div>
-        <button class="accordion"><b>Database Technologies</b></button>
-        <tr>
-            <div class="panel">
-                <div class="dbValues"></div>
-            </div>
-        </tr>
-        <tr>
-            <button class="accordion"><b>Mobile Technologies</b></button>
-        </tr>
-        <tr>
-            <div class="panel">
-                <div class="mdValues"></div>
-            </div>
-        </tr>
-    
 </body>
 <script src = "index.js"></script>
 </html>
